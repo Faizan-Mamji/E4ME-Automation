@@ -2,8 +2,6 @@ package MainDriver;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
-import org.omg.CORBA.StringHolder;
-
 import java.io.FileInputStream;
 import java.util.Properties;
 

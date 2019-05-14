@@ -13,6 +13,7 @@ import io.appium.java_client.android.AndroidKeyCode;
 import io.appium.java_client.touch.TapOptions;
 import io.appium.java_client.touch.offset.ElementOption;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
@@ -24,7 +25,7 @@ public class OtherFunctionFunctionalities extends DriverFile {
 
     Properties prop = new Properties();
     FileInputStream fs;
-    String medicalRequestID="4493";
+    String medicalRequestID;
     String medicalRequetText;
     String secretaryName;
     String secretary1 = "sadaat Ali";
@@ -230,9 +231,9 @@ public class OtherFunctionFunctionalities extends DriverFile {
 
     public void request_MedicalClaim() throws IOException {
         try {
-           // EPCL_MedicalRequest();
+            // EPCL_MedicalRequest();
             //LogoutEpcl();
-           // login_Secretsry();
+            // login_Secretsry();
             secretary_TaskApproved();
         } catch (Exception ex) {
             ex.getMessage();
