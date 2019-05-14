@@ -103,6 +103,10 @@ public class MedicalRequestPom extends DriverFile {
         return driver.findElementById("android:id/text1");
     }
 
+    public List<MobileElement> btnRequetsList() {
+        return driver.findElementsByXPath("//android.view.ViewGroup[@content-desc='submit']");
+    }
+
     public List<MobileElement> checkRequestDialog() {
         return driver.findElementsById("android:id/parentPanel");
     }

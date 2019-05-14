@@ -115,8 +115,8 @@ public class OtherFunctionFunctionalities extends DriverFile {
             TimeUnit.SECONDS.sleep(10);
             objLogin.btnclick().click();
             TimeUnit.SECONDS.sleep(10);
-            List<MobileElement> btnRequestList = driver.findElementsByXPath("//android.view.ViewGroup[@content-desc='submit']");
-            btnRequestList.get(1).click();
+            //List<MobileElement> btnRequestList = driver.findElementsByXPath("//android.view.ViewGroup[@content-desc='submit']");
+            objMedical.btnRequetsList().get(0).click();
             TimeUnit.SECONDS.sleep(25);
             Boolean checkSubmitRequestPanel = objMedical.checkRequestDialog().size() > 0;
             if (checkSubmitRequestPanel == true) {
@@ -214,6 +214,7 @@ public class OtherFunctionFunctionalities extends DriverFile {
 
     public void secretary_TaskApproved() {
         SecretaryApprove objSec = new SecretaryApprove(driver);
+        MedicalRequestPom objMedical=new MedicalRequestPom(driver);
         try {
             objSec.myTask().click();
             TimeUnit.SECONDS.sleep(25);
@@ -223,6 +224,10 @@ public class OtherFunctionFunctionalities extends DriverFile {
             TimeUnit.SECONDS.sleep(20);
             objSec.clickMedicalRequest(medicalRequestID).click();
             TimeUnit.SECONDS.sleep(20);
+            objMedical.btnRequetsList().get(0).click();
+            TimeUnit.SECONDS.sleep(10);
+            objMedical.requestSubmittedDialog().click();
+            TimeUnit.SECONDS.sleep(25);
         } catch (Exception ex) {
             ex.getMessage();
         }
