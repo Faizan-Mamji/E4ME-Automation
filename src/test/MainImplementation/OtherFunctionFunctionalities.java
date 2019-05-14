@@ -214,7 +214,7 @@ public class OtherFunctionFunctionalities extends DriverFile {
 
     public void secretary_TaskApproved() {
         SecretaryApprove objSec = new SecretaryApprove(driver);
-        MedicalRequestPom objMedical=new MedicalRequestPom(driver);
+        MedicalRequestPom objMedical = new MedicalRequestPom(driver);
         try {
             objSec.myTask().click();
             TimeUnit.SECONDS.sleep(25);
@@ -236,9 +236,9 @@ public class OtherFunctionFunctionalities extends DriverFile {
 
     public void request_MedicalClaim() throws IOException {
         try {
-            // EPCL_MedicalRequest();
-            //LogoutEpcl();
-            // login_Secretsry();
+            EPCL_MedicalRequest();
+            LogoutEpcl();
+            login_Secretsry();
             secretary_TaskApproved();
         } catch (Exception ex) {
             ex.getMessage();
