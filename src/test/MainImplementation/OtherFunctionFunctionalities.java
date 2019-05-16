@@ -25,6 +25,7 @@ public class OtherFunctionFunctionalities extends DriverFile {
 
     Properties prop = new Properties();
     FileInputStream fs;
+    int i;
     String medicalRequestID;
     String medicalRequetText;
     String secretaryName;
@@ -33,7 +34,11 @@ public class OtherFunctionFunctionalities extends DriverFile {
     String secretary3 = "ahmed1";
     String secretary4 = "Inam Jameel";
     String secretary5 = "Employee 2";
-
+    String btnDraft = "Save to Draft";
+    String btnSubmit = "Submit";
+    String btnApproved = "";
+    String btnDeclined = "";
+    String btnRework = "";
 
     public OtherFunctionFunctionalities(AndroidDriver<MobileElement> driver) {
         this.driver = driver;
@@ -116,7 +121,7 @@ public class OtherFunctionFunctionalities extends DriverFile {
             objLogin.btnclick().click();
             TimeUnit.SECONDS.sleep(10);
             //List<MobileElement> btnRequestList = driver.findElementsByXPath("//android.view.ViewGroup[@content-desc='submit']");
-            objMedical.btnRequetsList().get(0).click();
+            objMedical.btnRequetsList().get(1).click();
             TimeUnit.SECONDS.sleep(25);
             Boolean checkSubmitRequestPanel = objMedical.checkRequestDialog().size() > 0;
             if (checkSubmitRequestPanel == true) {

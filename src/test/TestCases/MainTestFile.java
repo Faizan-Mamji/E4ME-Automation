@@ -15,10 +15,10 @@ public class MainTestFile extends DriverFile {
         Epcl_MainDriver();
     }
 
-    @Test(priority = 0)
+    /*@Test(priority = 0)
     public void Test2() throws InterruptedException, IOException {
         MainLoginImplementation();
-    }
+    }*/
 
     @Test(priority = 1)
     public void Test3() throws IOException {
