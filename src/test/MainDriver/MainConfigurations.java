@@ -2,6 +2,7 @@ package MainDriver;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+
 import java.io.FileInputStream;
 import java.util.Properties;
 
@@ -27,6 +28,10 @@ public class MainConfigurations extends DriverFile {
     String getsecPassword4;
     String getsecretary5;
     String getsecPassword5;
+    String getdoctorusername;
+    String getdoctorPassword;
+    String getHrUsername;
+    String getHrPassword;
 
     Properties prop = new Properties();
 
@@ -202,4 +207,39 @@ public class MainConfigurations extends DriverFile {
         return getsecPassword5;
     }
 
+    public String epcl_doctorUsername() {
+        try {
+            getdoctorusername = prop.getProperty("DoctorUsername");
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
+        return getdoctorusername;
+    }
+
+    public String epcl_doctorPassword() {
+        try {
+            getdoctorPassword = prop.getProperty("DoctorPassword");
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
+        return getdoctorPassword;
+    }
+
+    public String epcl_hrUsername() {
+        try {
+            getHrUsername = prop.getProperty("hrUsername");
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
+        return getHrUsername;
+    }
+
+    public String epcl_hrPassword() {
+        try {
+            getHrPassword = prop.getProperty("hrPassword");
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
+        return getHrPassword;
+    }
 }

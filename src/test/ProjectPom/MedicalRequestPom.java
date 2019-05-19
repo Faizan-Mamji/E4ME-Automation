@@ -61,7 +61,7 @@ public class MedicalRequestPom extends DriverFile {
     }
 
     public MobileElement attachedImage() {
-        return driver.findElementById("com.android.documentsui:id/icon_mime");
+        return driver.findElementById("com.android.documentsui:id/date");
     }
 
     public MobileElement officePhotosclick() {

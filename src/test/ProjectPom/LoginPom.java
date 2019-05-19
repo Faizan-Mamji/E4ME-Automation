@@ -3,6 +3,7 @@ package ProjectPom;
 import MainDriver.DriverFile;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+
 import java.util.List;
 
 public class LoginPom extends DriverFile {
@@ -25,10 +26,6 @@ public class LoginPom extends DriverFile {
 
     public MobileElement btnclick() {
         return driver.findElementByAccessibilityId("submit");
-    }
-
-    public MobileElement Tap_Medical() {
-        return driver.findElementByAndroidUIAutomator("text(\"Medical\")");
     }
 }
 

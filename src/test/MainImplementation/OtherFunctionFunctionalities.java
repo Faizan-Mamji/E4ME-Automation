@@ -5,7 +5,7 @@ import MainDriver.MainConfigurations;
 import ProjectPom.DashboardPom;
 import ProjectPom.LoginPom;
 import ProjectPom.MedicalRequestPom;
-import ProjectPom.SecretaryApprove;
+import ProjectPom.GeneralApprove;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
@@ -16,7 +16,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -217,8 +216,46 @@ public class OtherFunctionFunctionalities extends DriverFile {
         }
     }
 
-    public void secretary_TaskApproved() {
-        SecretaryApprove objSec = new SecretaryApprove(driver);
+    public void login_Doctor() {
+        LoginPom objLogin = new LoginPom(driver);
+        MainConfigurations objConfig = new MainConfigurations(driver);
+
+        try {
+            TimeUnit.SECONDS.sleep(5);
+            objLogin.Login_Uname().setValue(objConfig.epcl_doctorUsername());
+            driver.hideKeyboard();
+            TimeUnit.SECONDS.sleep(5);
+            objLogin.Login_Password().setValue(objConfig.epcl_doctorPassword());
+            driver.hideKeyboard();
+            TimeUnit.SECONDS.sleep(5);
+            objLogin.btnclick().click();
+            TimeUnit.SECONDS.sleep(25);
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
+    }
+
+    public void login_HR() {
+        LoginPom objLogin = new LoginPom(driver);
+        MainConfigurations objConfig = new MainConfigurations(driver);
+
+        try {
+            TimeUnit.SECONDS.sleep(5);
+            objLogin.Login_Uname().setValue(objConfig.epcl_hrUsername());
+            driver.hideKeyboard();
+            TimeUnit.SECONDS.sleep(5);
+            objLogin.Login_Password().setValue(objConfig.epcl_hrPassword());
+            driver.hideKeyboard();
+            TimeUnit.SECONDS.sleep(5);
+            objLogin.btnclick().click();
+            TimeUnit.SECONDS.sleep(25);
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
+    }
+
+    public void mainAll_TaskApproved() {
+        GeneralApprove objSec = new GeneralApprove(driver);
         MedicalRequestPom objMedical = new MedicalRequestPom(driver);
         try {
             objSec.myTask().click();
@@ -239,12 +276,68 @@ public class OtherFunctionFunctionalities extends DriverFile {
 
     }
 
+    public void doctor_TaskApproved() {
+        GeneralApprove objSec = new GeneralApprove(driver);
+        MedicalRequestPom objMedical = new MedicalRequestPom(driver);
+        try {
+            objSec.myTask().click();
+            TimeUnit.SECONDS.sleep(25);
+            objSec.searchMedicalLatestApproval().setValue(medicalRequestID);
+            TimeUnit.SECONDS.sleep(2);
+            driver.pressKeyCode(AndroidKeyCode.ENTER);
+            TimeUnit.SECONDS.sleep(20);
+            objSec.clickMedicalRequest(medicalRequestID).click();
+            TimeUnit.SECONDS.sleep(20);
+            objMedical.btnRequetsList().get(0).click();
+            TimeUnit.SECONDS.sleep(10);
+            objMedical.requestSubmittedDialog().click();
+            TimeUnit.SECONDS.sleep(90);
+
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
+    }
+
+    public void verify_Notification() {
+        MedicalRequestPom objMed = new MedicalRequestPom(driver);
+        DashboardPom objDashBoard = new DashboardPom(driver);
+        try {
+
+            boolean checkNofication = objMed.checkRequestDialog().size() > 0;
+            TimeUnit.SECONDS.sleep(10);
+            if (checkNofication == true) {
+                objMed.requestSubmittedDialog().click();
+                TimeUnit.SECONDS.sleep(30);
+            }
+            boolean checkDashboardText = objDashBoard.Check_DasboardText().size() > 0;
+            if (checkDashboardText == true) {
+                LogoutEpcl();
+            } else {
+                driver.pressKeyCode(AndroidKeyCode.BACK);
+                boolean checkDashboard = objDashBoard.Check_DasboardText().size() > 0;
+                if (checkDashboard == true) {
+                    LogoutEpcl();
+                }
+            }
+
+
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
+    }
+
     public void request_MedicalClaim() throws IOException {
         try {
             EPCL_MedicalRequest();
             LogoutEpcl();
             login_Secretsry();
-            secretary_TaskApproved();
+            mainAll_TaskApproved();
+            LogoutEpcl();
+            login_Doctor();
+            doctor_TaskApproved();
+            verify_Notification();
+            login_HR();
+            mainAll_TaskApproved();
         } catch (Exception ex) {
             ex.getMessage();
         }

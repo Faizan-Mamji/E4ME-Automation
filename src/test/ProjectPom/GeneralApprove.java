@@ -4,10 +4,10 @@ import MainDriver.DriverFile;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 
-public class SecretaryApprove extends DriverFile {
+public class GeneralApprove extends DriverFile {
     public AndroidDriver<MobileElement> driver;
 
-    public SecretaryApprove(AndroidDriver<MobileElement> driver) {
+    public GeneralApprove(AndroidDriver<MobileElement> driver) {
         this.driver = driver;
     }
 
