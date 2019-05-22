@@ -313,7 +313,9 @@ public class OtherFunctionFunctionalities extends DriverFile {
             if (checkDashboardText == true) {
                 LogoutEpcl();
             } else {
-                driver.pressKeyCode(AndroidKeyCode.BACK);
+                //driver.pressKeyCode(AndroidKeyCode.BACK);
+                objMed.backArrow().click();
+                TimeUnit.SECONDS.sleep(5);
                 boolean checkDashboard = objDashBoard.Check_DasboardText().size() > 0;
                 if (checkDashboard == true) {
                     LogoutEpcl();

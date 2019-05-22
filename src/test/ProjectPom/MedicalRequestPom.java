@@ -114,4 +114,8 @@ public class MedicalRequestPom extends DriverFile {
     public MobileElement requestMedicalText() {
         return driver.findElementById("android:id/message");
     }
+
+    public MobileElement backArrow() {
+        return driver.findElementByXPath("//android.widget.ImageView[@index='0']");
+    }
 }
