@@ -10,6 +10,7 @@ public class MainConfigurations extends DriverFile {
 
     public AndroidDriver<MobileElement> driver;
     FileInputStream fs;
+    String implicitwaitt;
     String getDeviceID;
     String getDeviceName;
     String getVersion;
@@ -241,5 +242,14 @@ public class MainConfigurations extends DriverFile {
             ex.getMessage();
         }
         return getHrPassword;
+    }
+
+    public String epcl_implicit() {
+        try {
+            implicitwaitt = prop.getProperty("waitImplicit");
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
+        return implicitwaitt;
     }
 }

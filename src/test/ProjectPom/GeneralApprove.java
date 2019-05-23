@@ -16,7 +16,8 @@ public class GeneralApprove extends DriverFile {
     }
 
     public MobileElement searchMedicalLatestApproval() {
-        return driver.findElementByAndroidUIAutomator("text(\"Search\")");
+        //return driver.findElementByAndroidUIAutomator("text(\"Search\")");
+        return driver.findElementByXPath("//android.widget.EditText[@text='Search']");
     }
 
     public MobileElement clickMedicalRequest(String RequestID) {

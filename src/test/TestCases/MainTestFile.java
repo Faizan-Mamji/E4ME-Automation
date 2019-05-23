@@ -6,24 +6,35 @@ import org.testng.annotations.BeforeTest;
 import MainDriver.DriverFile;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
 
 public class MainTestFile extends DriverFile {
 
     @BeforeTest
-    public void Test() throws IOException {
-        Epcl_MainDriver();
+    public void Test() {
+        try {
+            Epcl_MainDriver();
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
     }
 
-    /*@Test(priority = 0)
-    public void Test2() throws InterruptedException, IOException {
-        MainLoginImplementation();
-    }*/
-
     @Test(priority = 1)
-    public void Test3() throws IOException {
-        OtherFunctionFunctionalities objFunctionalities = new OtherFunctionFunctionalities(driver);
-        objFunctionalities.request_MedicalClaim();
+    public void Test2() {
+        try {
+            MainLoginImplementation();
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
+    }
+
+    @Test(priority = 2)
+    public void Test3() {
+        try {
+            OtherFunctionFunctionalities objFunctionalities = new OtherFunctionFunctionalities(driver);
+            objFunctionalities.request_MedicalClaim();
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
     }
 
     @AfterTest

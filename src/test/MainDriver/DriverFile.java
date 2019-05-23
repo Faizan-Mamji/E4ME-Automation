@@ -9,6 +9,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidKeyCode;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
@@ -17,9 +18,11 @@ import java.util.logging.LogManager;
 public class DriverFile {
 
     public AndroidDriver<MobileElement> driver;
+
     private static final LogManager logg = LogManager.getLogManager();
 
-    public AndroidDriver<MobileElement> Epcl_MainDriver() throws IOException {
+    public AndroidDriver<MobileElement> Epcl_MainDriver() throws IOException, InterruptedException {
+
         MainConfigurations objConfig = new MainConfigurations(driver);
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability(MobileCapabilityType.DEVICE_NAME, objConfig.device_Name());
@@ -35,6 +38,7 @@ public class DriverFile {
 
         try {
             driver = new AndroidDriver<MobileElement>(new URL("http://0.0.0.0:4723/wd/hub"), caps);
+            driver.manage().timeouts().implicitlyWait(Long.parseLong(objConfig.implicitwaitt),TimeUnit.SECONDS);
             TimeUnit.SECONDS.sleep(8);
             System.out.println("Driver Line passed");
 
@@ -49,7 +53,7 @@ public class DriverFile {
     }
 
     public void LoginEpcl() {
-        MainConfigurations objConfig=new MainConfigurations(driver);
+        MainConfigurations objConfig = new MainConfigurations(driver);
         LoginPom objLogin = new LoginPom(driver);
         TouchAction ac = new TouchAction(driver);
         try {

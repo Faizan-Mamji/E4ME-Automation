@@ -281,13 +281,15 @@ public class OtherFunctionFunctionalities extends DriverFile {
         MedicalRequestPom objMedical = new MedicalRequestPom(driver);
         try {
             objSec.myTask().click();
-            TimeUnit.SECONDS.sleep(25);
+            TimeUnit.SECONDS.sleep(35);
+            objSec.searchMedicalLatestApproval().click();
+            TimeUnit.SECONDS.sleep(6);
             objSec.searchMedicalLatestApproval().setValue(medicalRequestID);
-            TimeUnit.SECONDS.sleep(2);
+            TimeUnit.SECONDS.sleep(6);
             driver.pressKeyCode(AndroidKeyCode.ENTER);
-            TimeUnit.SECONDS.sleep(20);
+            TimeUnit.SECONDS.sleep(25);
             objSec.clickMedicalRequest(medicalRequestID).click();
-            TimeUnit.SECONDS.sleep(20);
+            TimeUnit.SECONDS.sleep(30);
             objMedical.btnRequetsList().get(0).click();
             TimeUnit.SECONDS.sleep(10);
             objMedical.requestSubmittedDialog().click();
