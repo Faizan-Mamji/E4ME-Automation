@@ -2,10 +2,7 @@ package MainImplementation;
 
 import MainDriver.DriverFile;
 import MainDriver.MainConfigurations;
-import ProjectPom.DashboardPom;
-import ProjectPom.LoginPom;
-import ProjectPom.MedicalRequestPom;
-import ProjectPom.GeneralApprove;
+import ProjectPom.*;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
@@ -13,9 +10,10 @@ import io.appium.java_client.android.AndroidKeyCode;
 import io.appium.java_client.touch.TapOptions;
 import io.appium.java_client.touch.offset.ElementOption;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -25,6 +23,15 @@ public class OtherFunctionFunctionalities extends DriverFile {
     Properties prop = new Properties();
     FileInputStream fs;
     int i;
+    Boolean checkSubmitRequestPanel;
+    Boolean checkedMaritalStatus;
+    Boolean claimTypechoose;
+    Boolean checkAlertImagePermission;
+    Boolean checkOfficeGalleryPhotos;
+    Boolean valReturn;
+    Boolean checkNofication;
+    Boolean checkDashboardText;
+    Boolean checkDashboard;
     String medicalRequestID;
     String medicalRequetText;
     String secretaryName;
@@ -44,27 +51,26 @@ public class OtherFunctionFunctionalities extends DriverFile {
     }
 
     public void EPCL_MedicalRequest() {
+        LtrRequestPom objLtr = new LtrRequestPom(driver);
+        TouchAction act = new TouchAction(driver);
+        Random rnd = new Random();
+        int randomNumber = rnd.nextInt(999999);
+        DashboardPom objDashboard = new DashboardPom(driver);
+        LoginPom objLogin = new LoginPom(driver);
+        MedicalRequestPom objMedical = new MedicalRequestPom(driver);
         try {
-            TouchAction act = new TouchAction(driver);
-            Random rnd = new Random();
-            int randomNumber = rnd.nextInt(999999);
-            DashboardPom objDashboard = new DashboardPom(driver);
-            LoginPom objLogin = new LoginPom(driver);
-            MedicalRequestPom objMedical = new MedicalRequestPom(driver);
-            /*fs = new FileInputStream("MainConfiguration/Configuration.properties");
-            prop.load(fs);*/
             WebDriverWait wt = new WebDriverWait(driver, 20);
             TimeUnit.SECONDS.sleep(10);
             objDashboard.Medical_Icon().click();
             TimeUnit.SECONDS.sleep(20);
             objLogin.btnclick().click(); //ClaimButton click
             TimeUnit.SECONDS.sleep(10);
-            Boolean claimTypechoose = objMedical.chooseClaimScreen().size() > 0;
+            claimTypechoose = objMedical.chooseClaimScreen().size() > 0;
             if (claimTypechoose == true) {
                 objLogin.btnclick().click();
                 TimeUnit.SECONDS.sleep(5);
             }
-            Boolean checkedMaritalStatus = objMedical.chooseMaritalScreen().size() > 0;
+            checkedMaritalStatus = objMedical.chooseMaritalScreen().size() > 0;
             if (checkedMaritalStatus == true) {
                 objLogin.btnclick().click();
             }
@@ -93,12 +99,12 @@ public class OtherFunctionFunctionalities extends DriverFile {
             TimeUnit.SECONDS.sleep(10);
             objMedical.selectImage().click();
             TimeUnit.SECONDS.sleep(10);
-            Boolean checkAlertImagePermission = objMedical.checkImagePermission().size() > 0;
+            checkAlertImagePermission = objMedical.checkImagePermission().size() > 0;
             if (checkAlertImagePermission == true) {
                 objMedical.ImagePermissionAllow().click();
                 TimeUnit.SECONDS.sleep(10);
             }
-            Boolean checkOfficeGalleryPhotos = objMedical.checkOfficePhotoClick().size() > 0;
+            checkOfficeGalleryPhotos = objMedical.checkOfficePhotoClick().size() > 0;
             if (checkOfficeGalleryPhotos == true) {
                 objMedical.officePhotosclick().click();
                 TimeUnit.SECONDS.sleep(10);
@@ -115,14 +121,14 @@ public class OtherFunctionFunctionalities extends DriverFile {
             objLogin.btnclick().click();
             TimeUnit.SECONDS.sleep(25);
             objMedical.checkboxdeclartion().click();
-            boolean valReturn = objMedical.valuecheckboxdeclartion().size() > 0;
+            valReturn = objMedical.valuecheckboxdeclartion().size() > 0;
             TimeUnit.SECONDS.sleep(10);
             objLogin.btnclick().click();
             TimeUnit.SECONDS.sleep(10);
             //List<MobileElement> btnRequestList = driver.findElementsByXPath("//android.view.ViewGroup[@content-desc='submit']");
             objMedical.btnRequetsList().get(1).click();
             TimeUnit.SECONDS.sleep(25);
-            Boolean checkSubmitRequestPanel = objMedical.checkRequestDialog().size() > 0;
+            checkSubmitRequestPanel = objMedical.checkRequestDialog().size() > 0;
             if (checkSubmitRequestPanel == true) {
 
                 medicalRequetText = objMedical.requestMedicalText().getText();
@@ -305,25 +311,23 @@ public class OtherFunctionFunctionalities extends DriverFile {
         DashboardPom objDashBoard = new DashboardPom(driver);
         try {
 
-            boolean checkNofication = objMed.checkRequestDialog().size() > 0;
+            checkNofication = objMed.checkRequestDialog().size() > 0;
             TimeUnit.SECONDS.sleep(10);
             if (checkNofication == true) {
                 objMed.requestSubmittedDialog().click();
                 TimeUnit.SECONDS.sleep(30);
             }
-            boolean checkDashboardText = objDashBoard.Check_DasboardText().size() > 0;
+            checkDashboardText = objDashBoard.Check_DasboardText().size() > 0;
             if (checkDashboardText == true) {
                 LogoutEpcl();
             } else {
-                //driver.pressKeyCode(AndroidKeyCode.BACK);
                 objMed.backArrow().click();
                 TimeUnit.SECONDS.sleep(5);
-                boolean checkDashboard = objDashBoard.Check_DasboardText().size() > 0;
+                checkDashboard = objDashBoard.Check_DasboardText().size() > 0;
                 if (checkDashboard == true) {
                     LogoutEpcl();
                 }
             }
-
 
         } catch (Exception ex) {
             ex.getMessage();
@@ -342,6 +346,39 @@ public class OtherFunctionFunctionalities extends DriverFile {
             verify_Notification();
             login_HR();
             mainAll_TaskApproved();
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
+    }
+
+    public void LTR_Request() {
+        LtrRequestPom objLtr = new LtrRequestPom(driver);
+        TouchAction act = new TouchAction(driver);
+        Random rnd = new Random();
+        int randomNumber = rnd.nextInt(999999);
+        DashboardPom objDashboard = new DashboardPom(driver);
+        LoginPom objLogin = new LoginPom(driver);
+        MedicalRequestPom objMedical = new MedicalRequestPom(driver);
+        try {
+            Date dt = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("d");
+            System.out.println(sdf.format(dt));
+            objDashboard.LocalTransport_Icon().click();
+            TimeUnit.SECONDS.sleep(25);
+            objLtr.btnLTRRequest().click();
+            TimeUnit.SECONDS.sleep(15);
+            if (claimTypechoose == true) {
+                objLogin.btnclick().click();
+                TimeUnit.SECONDS.sleep(5);
+            }
+            objLtr.textPickUp().setValue("Testing");
+            TimeUnit.SECONDS.sleep(10);
+            objLtr.textDropOff().setValue("Testing");
+            TimeUnit.SECONDS.sleep(10);
+            objLtr.nextBtn().click();
+            TimeUnit.SECONDS.sleep(15);
+            objLtr.dateSelection(sdf.format(dt)).click();
+            TimeUnit.SECONDS.sleep(10);
         } catch (Exception ex) {
             ex.getMessage();
         }

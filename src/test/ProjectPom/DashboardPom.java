@@ -20,5 +20,12 @@ public class DashboardPom extends DriverFile {
         return driver.findElementByAndroidUIAutomator("text(\"Medical\")");
     }
 
+    public MobileElement LocalTransport_Icon() {
+        return driver.findElementByAndroidUIAutomator("text(\"Transport\")");
+    }
+
+
+
+
 
 }

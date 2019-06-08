@@ -18,6 +18,10 @@ import java.util.logging.LogManager;
 public class DriverFile {
 
     public AndroidDriver<MobileElement> driver;
+    Boolean CheckDashboard;
+    Boolean CheckLoginScreen;
+    Boolean CheckDashboardText;
+    Boolean CheckLoginUText;
 
     private static final LogManager logg = LogManager.getLogManager();
 
@@ -38,7 +42,7 @@ public class DriverFile {
 
         try {
             driver = new AndroidDriver<MobileElement>(new URL("http://0.0.0.0:4723/wd/hub"), caps);
-            driver.manage().timeouts().implicitlyWait(Long.parseLong(objConfig.implicitwaitt),TimeUnit.SECONDS);
+            driver.manage().timeouts().implicitlyWait(Long.parseLong(objConfig.epcl_implicit()),TimeUnit.SECONDS);
             TimeUnit.SECONDS.sleep(8);
             System.out.println("Driver Line passed");
 
@@ -95,8 +99,8 @@ public class DriverFile {
 
         try {
             TimeUnit.SECONDS.sleep(25);
-            boolean CheckDashboard = objDashboard.Check_DasboardText().size() > 0;
-            boolean CheckLoginScreen = objLogin.Check_LoginUname().size() > 0;
+            CheckDashboard = objDashboard.Check_DasboardText().size() > 0;
+            CheckLoginScreen = objLogin.Check_LoginUname().size() > 0;
 
             if (CheckDashboard == true && CheckLoginScreen == false) {
                 LogoutEpcl();
@@ -104,8 +108,8 @@ public class DriverFile {
             } else if (CheckDashboard == false && CheckLoginScreen == false) {
                 for (int i = 0; i < 10; i++) {
                     driver.pressKeyCode(AndroidKeyCode.BACK);
-                    boolean CheckDashboardText = objDashboard.Check_DasboardText().size() > 0;
-                    boolean CheckLoginUText = objLogin.Check_LoginUname().size() > 0;
+                    CheckDashboardText = objDashboard.Check_DasboardText().size() > 0;
+                    CheckLoginUText = objLogin.Check_LoginUname().size() > 0;
                     if (CheckDashboardText == true && CheckLoginUText == false) {
                         LogoutEpcl();
                         LoginEpcl();
