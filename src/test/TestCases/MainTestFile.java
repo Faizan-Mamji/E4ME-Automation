@@ -22,14 +22,14 @@ public class MainTestFile extends DriverFile {
         }
     }
 
-    @Test(priority = 1)
+    /*@Test(priority = 1)
     public void Test2() {
         try {
             MainLoginImplementation();
         } catch (Exception ex) {
             ex.getMessage();
         }
-    }
+    }*/
 
     @Test(priority = 2)
     public void Test3() {

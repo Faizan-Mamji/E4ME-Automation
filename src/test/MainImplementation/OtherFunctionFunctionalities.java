@@ -10,6 +10,7 @@ import io.appium.java_client.android.AndroidKeyCode;
 import io.appium.java_client.touch.TapOptions;
 import io.appium.java_client.touch.offset.ElementOption;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -23,6 +24,7 @@ public class OtherFunctionFunctionalities extends DriverFile {
     Properties prop = new Properties();
     FileInputStream fs;
     int i;
+    Boolean checkCustodian;
     Boolean checkSubmitRequestPanel;
     Boolean checkedMaritalStatus;
     Boolean claimTypechoose;
@@ -362,23 +364,44 @@ public class OtherFunctionFunctionalities extends DriverFile {
         try {
             Date dt = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("d");
-            System.out.println(sdf.format(dt));
             objDashboard.LocalTransport_Icon().click();
             TimeUnit.SECONDS.sleep(25);
             objLtr.btnLTRRequest().click();
             TimeUnit.SECONDS.sleep(15);
+            claimTypechoose = objLtr.chooseClaimScreen().size() > 0;
             if (claimTypechoose == true) {
                 objLogin.btnclick().click();
                 TimeUnit.SECONDS.sleep(5);
             }
-            objLtr.textPickUp().setValue("Testing");
-            TimeUnit.SECONDS.sleep(10);
-            objLtr.textDropOff().setValue("Testing");
+            objLtr.textPickUp().setValue("Te");
+            //TimeUnit.SECONDS.sleep(10);
+            driver.hideKeyboard();
+            objLtr.textDropOff().setValue("ng");
+            driver.hideKeyboard();
             TimeUnit.SECONDS.sleep(10);
             objLtr.nextBtn().click();
             TimeUnit.SECONDS.sleep(15);
             objLtr.dateSelection(sdf.format(dt)).click();
             TimeUnit.SECONDS.sleep(10);
+            objLtr.nextBtn().click();
+            TimeUnit.SECONDS.sleep(10);
+            objLtr.nextBtn().click();
+            TimeUnit.SECONDS.sleep(10);
+            checkCustodian = objLtr.drpCustodian().size() > 0;
+            if (checkCustodian == true) {
+                objLtr.custodianClick().click();
+                TimeUnit.SECONDS.sleep(5);
+                objLtr.custodianValue().click();
+                TimeUnit.SECONDS.sleep(5);
+            }
+            objLtr.adminDrpClick().click();
+            TimeUnit.SECONDS.sleep(5);
+            objLtr.adminValue().click();
+            TimeUnit.SECONDS.sleep(5);
+            objLtr.txtNumber().setValue("123456");
+            TimeUnit.SECONDS.sleep(5);
+
+
         } catch (Exception ex) {
             ex.getMessage();
         }
